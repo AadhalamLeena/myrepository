@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="taskFlow" doc:id="9b4227f7-167e-4cb5-a9e2-3e49eb0151b7" >
+		<http:listener doc:name="Listener" doc:id="fcfa76da-8fb4-42de-8d50-2b6a2fb8ad39" path="task" config-ref="HTTP_Listener_config"/>
+		<set-variable value="mytask" doc:name="Set Variable" doc:id="55608580-852c-46e6-8b53-9acbe05e4c82" variableName="X"/>
+		<set-payload value='#[vars.X ++"is done"]' doc:name="Set Payload" doc:id="65234375-1cd9-4ccb-9af8-9c2e6928c4cb" />
+		<flow-ref doc:name="Flow Reference" doc:id="9ad56f29-536e-4b70-87be-b61d24425ff9" name="taskFlow1" target="Set Payload"/>
+	</flow>
+	<flow name="taskFlow1" doc:id="1bd8c1e2-9d3b-47c1-a07b-c2d15cfaab9f" >
+		<http:listener doc:name="Listener" doc:id="d53d632e-ede4-4b83-831a-c35063380ce3" config-ref="HTTP_Listener_config" path="task2"/>
+		<set-variable value='#["my life"]' doc:name="Set Variable" doc:id="a37ec0dc-461b-4d06-bbd3-cbac168fec53" variableName="z"/>
+		<set-payload value='#[vars.z ++ "my rules"]' doc:name="Set Payload" doc:id="a1d2d74e-529f-4731-97dc-c4f8ce5db7d0" />
+	</flow>
+</mule>

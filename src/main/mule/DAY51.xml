@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="DAY51Flow" doc:id="2f5cd272-709f-4123-9d9d-4639d19697e6" >
+		<http:listener doc:name="Listener" doc:id="431a0e65-0d36-494b-a17f-e328ea5f7ad7" config-ref="HTTP_Listener_config2" path="DEMO5"/>
+		<set-variable value="#[&quot;hello&quot; ++' ' ++  message.attributes.queryParams.uname as String]" doc:name="Set Variable" doc:id="90493ddd-99d2-44e0-8ee5-340d9fcce072" variableName="x"/>
+		<set-payload value="#[vars.x]" doc:name="Set Payload" doc:id="fe2487b8-af2d-4772-aa58-d5a3730bd1e1" />
+		<set-variable value="#[&quot;city&quot; ++ ' ' ++  message.attributes.queryParams.ucity as String]" doc:name="Set Variable" doc:id="073c5954-781b-4413-a68c-ef40f0d6df81" variableName="y"/>
+		<set-payload value="#[vars.x  ++  vars.y]" doc:name="Set Payload" doc:id="8c694524-1474-43b1-86a8-67175b5a4c88" />
+	</flow>
+	<flow name="DAY51Flow1" doc:id="d23c3a3a-c8d0-4e1d-8529-538e8aef88be" >
+		<http:listener doc:name="Listener" doc:id="6642cc51-6a29-4b59-9f8b-65b8270cf9ea" config-ref="HTTP_Listener_config" path="task6/{uname}/{ucity}"/>
+		<set-variable value='#["HELLO!!!" ++  message.attributes.uriParams.uname as String]' doc:name="Set Variable" doc:id="431a8ea6-3b5b-45f7-bf1f-9bb98067268a" variableName="x"/>
+		<set-payload value="#[vars.x]" doc:name="Set Payload" doc:id="9d2b9355-0974-4a5d-bec3-db783084efc7" />
+		<set-variable value="#[message.attributes.uriParams.ucity as String]" doc:name="Set Variable" doc:id="7feef6fe-3e90-4c42-a284-c982a2590454" variableName="y"/>
+		<set-payload value="#[vars.x ++ vars.y]" doc:name="Set Payload" doc:id="2d6cea3e-c63c-4d04-b2ee-eb9c6d3f1735" />
+	</flow>
+</mule>

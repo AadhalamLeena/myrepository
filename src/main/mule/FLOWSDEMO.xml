@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="FLOWSDEMOFlow" doc:id="5eaeba57-625d-4cb6-b3e2-8b68d6d74b15" >
+		<http:listener doc:name="Listener" doc:id="a002d180-240c-46c6-8743-a32cc9fb270f" config-ref="HTTP_Listener_config" path="flow/{uname}/{ucity}"/>
+		<set-variable value='#["HELLO!!!" ++  message.attributes.uriParams.uname as String]' doc:name="name" doc:id="6459aee0-9df1-454e-b746-1e7a1e888a04" variableName="name"/>
+		<set-payload value="#[vars.name]" doc:name="Set Payload" doc:id="b904650e-00f6-4854-ba11-e3c3c68cf61c" />
+		<set-variable value="#[message.attributes.uriParams.ucity as String]" doc:name="city" doc:id="bb6a7cd4-c75c-4e99-9a80-eea51ed4d4be" variableName="city"/>
+		<set-payload value="#[vars.name ++ vars.city]" doc:name="Set Payload" doc:id="b802220d-6248-49b2-b4ec-32060b732b00" />
+		<flow-ref doc:name="Flow Reference" doc:id="321ae40c-0699-45ff-91b9-65751d704d15" name="FLOWSDEMOFlow1" />
+	</flow>
+	<flow name="FLOWSDEMOFlow1" doc:id="fd64ad52-8548-46a3-ba29-58250ea96499" >
+		<http:listener doc:name="Listener" doc:id="4935a3ad-d986-42eb-bce1-5f80459dda7e" config-ref="HTTP_Listener_config" path="flow1"/>
+		<set-variable value="#[&quot;state&quot;++' ' ++  message.attributes.queryParams.ustate as String]" doc:name="state" doc:id="f0d8c822-f150-40cd-92ca-12ef0dacf575" variableName="state"/>
+		<set-payload value="#[vars.state]" doc:name="Set Payload" doc:id="e11c801b-7374-4983-bf14-a8218215d5f6" />
+		<set-variable value="#[&quot;country&quot; ++ ' ' ++  message.attributes.queryParams.ucountry as String]" doc:name="country" doc:id="b02d5b20-7506-459e-89db-88e10f18a458" variableName="country"/>
+		<set-payload value="#[vars.state ++ vars.country]" doc:name="Set Payload" doc:id="66b6cc97-f55b-4fd7-aba3-e167a097756f" />
+	</flow>
+</mule>

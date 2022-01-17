@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="DAY5Flow" doc:id="cdad72c4-3b18-4cd7-9159-dc0903ac1f37" >
+		<http:listener doc:name="Listener" doc:id="a320b9e8-9c22-4cd6-8389-e99e73c34285" config-ref="HTTP_Listener_config2" path="DAY5"/>
+		<set-variable value='#["I AM LEENA"]' doc:name="Set Variable" doc:id="38c66dec-c85d-4127-9268-d2feaf12d3e0" variableName="X"/>
+		<set-payload value="#[vars.X]" doc:name="Set Payload" doc:id="93f62435-3af0-4768-a2e6-f7e6d6acc6d9" />
+		<logger level="INFO" doc:name="Logger" doc:id="aaca26c0-a5da-415f-9a1c-5e11139b408c" message="#[payload]"/>
+		<set-variable value='#["FROM TIRUPATHI"]' doc:name="Set Variable" doc:id="62747823-e898-4f99-abd7-287213008c87" variableName="Y"/>
+		<set-payload value="#[vars.X ++ vars.Y]" doc:name="Set Payload" doc:id="97c17df5-6ac7-430b-883e-31708bba9432" />
+		<logger level="INFO" doc:name="Logger" doc:id="122db092-e1ea-4833-ae29-e15c7f639365" message="#[payload]"/>
+		<set-variable value='#["state is AndhraPradesh"]' doc:name="Set Variable" doc:id="780aea58-dbe8-4c1d-83d6-5463915ba6ef" variableName="Z"/>
+		<set-payload value="#[vars.X  ++  vars.Y  ++  vars.Z]" doc:name="Set Payload" doc:id="e88d89f9-31c2-41d9-9a55-d9ecc503387a" />
+		<logger level="INFO" doc:name="Logger" doc:id="114bb2d1-d97f-4cba-ad68-ebfc0bddadcb" />
+		<set-variable value='#["Country is India"]' doc:name="Set Variable" doc:id="d3fed0ca-46b6-4828-a0bc-ecd29746aff2" variableName="A"/>
+		<set-payload value="#[vars.X ++ vars.Y ++ vars.Z ++ vars.A]" doc:name="Set Payload" doc:id="d7f7bbdb-fb46-407f-b5e9-999e7bc36e75" />
+	</flow>
+</mule>

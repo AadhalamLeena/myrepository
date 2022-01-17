@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config2" doc:name="HTTP Listener config" doc:id="086f384d-a6aa-4a8d-a50a-0976420d163f" basePath="Path2" >
+		<http:listener-connection host="0.0.0.0" port="8083" />
+	</http:listener-config>
+	<flow name="TASK2Flow" doc:id="e6980116-93b3-4b34-b95f-9647357c635a" >
+		<http:listener doc:name="Listener" doc:id="5b6e4f61-cedc-4fe7-92ec-2f8107580cf9" config-ref="HTTP_Listener_config2" path="demo3"/>
+		<set-variable value="#['good morning']" doc:name="Set Variable" doc:id="cd9838e5-976c-4c90-8a95-3f941439530b" variableName="y"/>
+		<set-payload value="#[vars.y ++ 'welcome to mule']" doc:name="Set Payload" doc:id="eea30c1d-6084-497d-875d-e109212354dd" />
+	</flow>
+	<flow name="TASK2Flow1" doc:id="7906a375-5cb3-47ab-95c4-aca212eba155" >
+		<http:listener doc:name="Listener" doc:id="bac688d3-ec8f-4da6-93e1-25e49d3b31a1" config-ref="HTTP_Listener_config2" path="task2"/>
+		<set-variable value='#["my life"]' doc:name="Set Variable" doc:id="e730a49a-a98f-4f5a-b8cd-9aa5f50b5142" variableName="x"/>
+		<set-payload value='#[vars.x ++ "my rules"]' doc:name="Set Payload" doc:id="10864408-aa8f-4ef9-a4da-34eed1800d1c" />
+	</flow>
+</mule>
